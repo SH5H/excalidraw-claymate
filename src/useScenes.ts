@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AppState, BinaryFiles } from "@excalidraw/excalidraw/types/types";
-import { ExcalidrawElement } from "@excalidraw/excalidraw/types/element/types";
+import type { AppState, BinaryFiles } from "@excalidraw/excalidraw/types/types";
+import type { ExcalidrawElement } from "@excalidraw/excalidraw/types/element/types";
 import isEqual from "lodash/isEqual";
 import { createScene } from "./creation";
 import { Drawing, Scene } from "./types";

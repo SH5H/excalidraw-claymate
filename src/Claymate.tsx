@@ -108,35 +108,25 @@ const Claymate = ({
   };
 
   const deleteScene = (id: string) => {
-    const index = scenes.findIndex((sc) => sc.id === id);
-    if (index >= 0) {
-      const remainingScenes = scenes.length - 1;
-      if (remainingScenes > 0) {
-        let newCurrent;
-        if (currentIndex !== undefined) {
-          const deletingCurrentScene = index === currentIndex;
-          if (currentIndex > index || deletingCurrentScene) {
-            let sourceIndex = currentIndex;
-            if (deletingCurrentScene) {
-              if (currentIndex === remainingScenes) {
-                sourceIndex = currentIndex - 1;
-              } else if (currentIndex === 0) {
-                sourceIndex = 1;
-              }
-            }
-            newCurrent = {
-              index: currentIndex > 0 ? currentIndex - 1 : currentIndex,
-              drawing: scenes[sourceIndex].drawing,
-            };
-          }
-        }
-        updateScenes(
-          (prev: Scene[]) => prev.filter((item) => item.id !== id),
-          newCurrent
-        );
-      }
+    const deletedSceneIndex = scenes.findIndex((item) => {
+      return item.id === id
+    });
+    if(deletedSceneIndex < 0) return;
+    updateScenes((prev) => {
+      const nextScenes = prev.filter((item) =>
+        item.id !== id
+      );
+      return nextScenes
+    });
+    if (currentIndex === undefined) return;
+    const remainingScenesCount = scenes.length - 1;
+    if (currentIndex === remainingScenesCount
+      || (deletedSceneIndex >= remainingScenesCount && currentIndex === deletedSceneIndex)){
+      const newIndexOfRemainingScenes = remainingScenesCount - 1;
+      moveToScene(newIndexOfRemainingScenes);
     }
-  };
+
+  }
 
   const moveLeft = (id: string) => {
     const index = scenes.findIndex((item) => item.id === id);

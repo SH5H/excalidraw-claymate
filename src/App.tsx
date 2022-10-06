@@ -4,9 +4,9 @@ import type {
   ExcalidrawAPIRefValue,
   ExcalidrawImperativeAPI,
 } from "@excalidraw/excalidraw/types/types";
+import type { Drawing } from "./types";
 import "./App.css";
 import Claymate from "./Claymate";
-import { Drawing } from "./types";
 import { useScenes } from "./useScenes";
 import { useLibrary } from "./useLibrary";
 
